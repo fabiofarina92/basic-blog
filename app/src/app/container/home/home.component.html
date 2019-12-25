@@ -29,7 +29,7 @@
                 <a routerLink="/post/{{ post._id }}/view" class="btn btn-primary">View post</a>
               </div>
               <div class="card-footer">
-                <small class="text-muted">{{ post.created }}</small>
+                <small class="text-muted">{{ post.created | date: 'mediumDate' }}</small>
               </div>
             </div>
           </div>
