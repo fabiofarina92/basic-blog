@@ -47,4 +47,16 @@ export class PostsService {
 
     return this.httpClient.post<any>(formatEndPoint, { id }, { headers: httpHeaders});
   }
+
+  public edit(id: string, post) {
+    const formatEndPoint = `${environment.apiUrl}/${this.endPoint}/edit`;
+    console.log('edit called with: ', formatEndPoint);
+    console.log('and with post: ', post);
+
+    const httpHeaders = new HttpHeaders()
+      .append('Accept', 'application/json')
+      .append('Content-Type', 'application/json');
+
+    return this.httpClient.post<any>(formatEndPoint, {id, post}, { headers: httpHeaders});
+  }
 }

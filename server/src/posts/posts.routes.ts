@@ -7,5 +7,6 @@ router.get('/:id', postsController.getPost);
 router.get('/', postsController.getAllPosts);
 router.post('/new', postsController.newPost);
 router.post('/delete', postsController.deletePost);
+router.post('/edit', postsController.editPost);
 
 export default router;

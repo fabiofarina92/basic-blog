@@ -4,7 +4,7 @@ import { ViewPostComponent } from './view-post/view-post.component';
 import { NewPostComponent } from './new-post/new-post.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-
+import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
 
 
 @NgModule({
@@ -16,7 +16,8 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
-  ]
+    RouterModule,
+    RichTextEditorAllModule
+  ],
 })
 export class PostsModule { }

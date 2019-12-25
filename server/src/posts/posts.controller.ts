@@ -40,18 +40,19 @@ export const getAllPosts = (request: Request, response: Response) => {
 
 export const newPost = (request: Request, response: Response) => {
     if (request.body.title && request.body.content) {
-        PostsCounter.findOne({ _id: 1 }).then((counter: any) => {
+        PostsCounter.findOne({_id: 1}).then((counter: any) => {
             if (counter) {
                 const newId = counter.seq + 1;
                 logger.info('New id: %s', newId);
                 Posts.create({
                     _id: newId,
                     content: request.body.content,
+                    post: request.body.post,
                     title: request.body.title
                 }).then((post) => {
                     if (post) {
                         logger.info('Post successfully created: %s', JSON.stringify(post));
-                        PostsCounter.findOneAndUpdate({ _id: 1}, {$set: { seq: newId} }).then((counterUpdate) => {
+                        PostsCounter.findOneAndUpdate({_id: 1}, {$set: {seq: newId}}).then((counterUpdate) => {
                             logger.info('Counter was also updated: %s', JSON.stringify(counterUpdate));
                         });
                         response.status(200).json({
@@ -74,7 +75,7 @@ export const newPost = (request: Request, response: Response) => {
 
 export const deletePost = (request: Request, response: Response) => {
     if (request.body.id) {
-        Posts.findOneAndDelete({ _id: request.body.id }).then(() => {
+        Posts.findOneAndDelete({_id: request.body.id}).then(() => {
             response.status(200).json({
                 message: 'Post was successfully removed'
             });
@@ -83,6 +84,31 @@ export const deletePost = (request: Request, response: Response) => {
         logger.info('Request didn\'t contian an id to delete');
         response.status(404).json({
             message: 'No id was provided'
+        });
+    }
+};
+
+export const editPost = (request: Request, response: Response) => {
+    if (request.body.post.title && request.body.post.content && request.body.id) {
+        Posts.findOneAndUpdate({_id: request.body.id}, {
+            $set: {
+                content: request.body.post.content, post: request.body.post.post, title: request.body.post.title
+            }
+        }).then((updatedPost) => {
+            if (updatedPost) {
+                response.status(200).json({
+                    message: 'Post updated successfully',
+                    updatedPost,
+                });
+            } else {
+                response.status(500).json({
+                    message: 'Something went wrong!'
+                });
+            }
+        });
+    } else {
+        response.status(404).json({
+            message: 'Incorrect data sent to server'
         });
     }
 };

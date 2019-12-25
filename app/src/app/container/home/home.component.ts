@@ -9,12 +9,15 @@ import { PostsService } from '../../service/posts/posts.service';
 export class HomeComponent implements OnInit {
 
   allPost: any = [];
+  allPostGrouped: any = [];
+  featuredPost: any = []
   constructor(private postsService: PostsService) { }
 
   ngOnInit() {
-    this.postsService.getAll().subscribe((data) => {
-      console.log(data);
+    this.postsService.getAll().subscribe((data: []) => {
       this.allPost = data;
+      this.allPostGrouped = data.map((e, i) => i % 3 === 0 ? data.slice(i, i + 3) : null).filter(e => e);
+      this.featuredPost = data[Math.floor(Math.random() * data.length) + 1];
     });
   }
 

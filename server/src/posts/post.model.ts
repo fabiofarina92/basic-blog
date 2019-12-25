@@ -5,6 +5,7 @@ const postsSchema = new Schema({
     _id: Number,
     content: { type: String },
     created: { type: Date, default: Date.now },
+    post: { type: String },
     title: { type: String }
 });
 
