@@ -9,4 +9,5 @@ const postsSchema = new Schema({
 });
 
 const exportModel = mongoose.model('Posts', postsSchema);
+
 export default exportModel;

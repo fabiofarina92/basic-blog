@@ -1,0 +1,8 @@
+<h2>Blog site</h2>
+
+<div *ngFor="let post of allPost">
+  <div *ngIf="post.title">
+    <h3><a routerLink="/post/{{ post._id }}/view">{{ post.title }}</a></h3>
+    <h4>{{ post.created }}</h4>
+  </div>
+</div>
