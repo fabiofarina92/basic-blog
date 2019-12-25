@@ -39,8 +39,6 @@ export const getAllPosts = (request: Request, response: Response) => {
 };
 
 export const newPost = (request: Request, response: Response) => {
-    logger.info('Request made to newPost endpoint');
-    logger.info(request.body);
     if (request.body.title && request.body.content) {
         PostsCounter.findOne({ _id: 1 }).then((counter: any) => {
             if (counter) {
@@ -71,5 +69,20 @@ export const newPost = (request: Request, response: Response) => {
         });
     } else {
         response.status(404).json('Please provide the body and content');
+    }
+};
+
+export const deletePost = (request: Request, response: Response) => {
+    if (request.body.id) {
+        Posts.findOneAndDelete({ _id: request.body.id }).then(() => {
+            response.status(200).json({
+                message: 'Post was successfully removed'
+            });
+        });
+    } else {
+        logger.info('Request didn\'t contian an id to delete');
+        response.status(404).json({
+            message: 'No id was provided'
+        });
     }
 };

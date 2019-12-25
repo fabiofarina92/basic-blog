@@ -28,13 +28,23 @@ export class PostsService {
     console.log('new called with: ', formatEndPoint);
     console.log('and with post: ', post);
 
-    // Accept: application/json
-    // Cache-Control: no-cache
-    // Content-Type: application/json
     const httpHeaders = new HttpHeaders()
       .append('Accept', 'application/json')
       .append('Content-Type', 'application/json');
 
     return this.httpClient.post<any>(formatEndPoint, post, { headers: httpHeaders});
+  }
+
+  public delete(id: string) {
+    const formatEndPoint = `${environment.apiUrl}/${this.endPoint}/delete`;
+
+    console.log('new called with: ', formatEndPoint);
+    console.log('and with id: ', id);
+
+    const httpHeaders = new HttpHeaders()
+      .append('Accept', 'application/json')
+      .append('Content-Type', 'application/json');
+
+    return this.httpClient.post<any>(formatEndPoint, { id }, { headers: httpHeaders});
   }
 }

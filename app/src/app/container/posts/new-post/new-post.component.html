@@ -1,13 +1,14 @@
 <h2>Create new post</h2>
+<a routerLink="/">Home</a>
 <form [formGroup]="newPostForm">
   <label for="title">Title</label>
   <input type="text" formControlName="title" id="title">
 
   <label for="content">Content</label>
-  <input type="text" formControlName="content" id="content">
-
+  <textarea formControlName="content" id="content" ></textarea>
   <button (click)="submit()">Submit</button>
 </form>
 <div *ngIf="serverResponse">
   <p>{{ serverResponse.message }}</p>
+  <a routerLink="/post/{{ serverResponse.id }}/view">View post</a>
 </div>

@@ -11,6 +11,7 @@ export class ViewPostComponent implements OnInit {
 
   selectedPostId: string;
   selectedPostData: any;
+  serverResponse: any = null;
   constructor(private route: ActivatedRoute, private postsService: PostsService) { }
 
   ngOnInit() {
@@ -23,4 +24,9 @@ export class ViewPostComponent implements OnInit {
 
   }
 
+  delete() {
+    this.postsService.delete(this.selectedPostId).subscribe((response) => {
+      this.serverResponse = response;
+    });
+  }
 }

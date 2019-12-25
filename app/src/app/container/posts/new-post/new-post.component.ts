@@ -10,7 +10,7 @@ import { PostsService } from '../../../service/posts/posts.service';
 export class NewPostComponent implements OnInit {
 
   newPostForm: FormGroup;
-  serverResponse: string = null;
+  serverResponse: any = null;
 
   constructor(private formBuilder: FormBuilder, private postsService: PostsService) { }
 

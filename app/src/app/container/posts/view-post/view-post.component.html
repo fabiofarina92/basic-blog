@@ -3,3 +3,9 @@
   <h3>{{ selectedPostData.created }}</h3>
   <p>{{ selectedPostData.content }}</p>
 </div>
+
+<button (click)="delete()">Delete?</button>
+<div *ngIf="serverResponse">
+  <p>{{ serverResponse.message }}</p>
+</div>
+<a routerLink="/home">Home</a>
