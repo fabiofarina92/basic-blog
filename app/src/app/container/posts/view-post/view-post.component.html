@@ -11,7 +11,7 @@
     <h3 class="text-muted">{{ selectedPostData.content }}</h3>
     <h6 class="font-italic">{{ selectedPostData.created | date: 'mediumDate' }}</h6>
     <div class="container mt-4">
-      <div [innerHTML]="selectedPostData.post"></div>
+      <div class="format-content" [innerHTML]="selectedPostData.post"></div>
     </div>
   </div>
 </div>

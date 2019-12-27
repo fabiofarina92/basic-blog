@@ -9,6 +9,7 @@ import {
   ToolbarService
 } from '@syncfusion/ej2-angular-richtexteditor';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import hljs from 'highlight.js';
 
 @Component({
   selector: 'app-view-post',
@@ -36,13 +37,16 @@ export class ViewPostComponent implements OnInit {
     ]
   };
   editPostForm: FormGroup;
-  constructor(private route: ActivatedRoute, private postsService: PostsService, private formBuilder: FormBuilder) { }
+  constructor(private route: ActivatedRoute, private postsService: PostsService, private formBuilder: FormBuilder) {
+  }
 
   ngOnInit() {
     this.selectedPostId = this.route.snapshot.paramMap.get('id');
 
-    this.postsService.get(this.selectedPostId).subscribe((data) => {
+    this.postsService.get(this.selectedPostId).subscribe((data: any) => {
       this.selectedPostData = data;
+      // this.selectedPostData.post = this.findAndFormatOutput(data.post);
+      // this.selectedPostData.post = hljs.highlightAuto(data.post);
       console.log(this.selectedPostData);
     });
 
@@ -79,5 +83,28 @@ export class ViewPostComponent implements OnInit {
       this.selectedPostData = newPost;
       this.viewMode = 'view';
     });
+  }
+
+  findAndFormatOutput(content: any) {
+    let newContent = content;
+    const regex = /<\s*pre[^>]*><\s*code[^>]*>(.*?)<\s*\/\s*code><\s*\/\s*pre>/g;
+    const codeBlocks = content.match(regex);
+    console.log('blocks', codeBlocks[0]);
+
+    let m;
+    const arr = [];
+
+    while ((m = regex.exec(content)) != null) {
+      if (m.index === regex.lastIndex) {
+        regex.lastIndex++;
+      }
+      arr.push(m[1]);
+    }
+
+    console.log('arr', arr);
+    arr.forEach((val) => {
+      newContent = newContent.replace(val, hljs.highlightAuto(val, ['typescript']).value);
+    });
+    return newContent;
   }
 }
