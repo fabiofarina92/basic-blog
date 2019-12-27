@@ -4,32 +4,34 @@
     <p class="lead">This is an iterative attempt to a blog site. Enjoy!</p>
   </div>
 </div>
-<div *ngIf="featuredPost">
-  <div class="card">
-    <h5 class="card-header">Featured</h5>
-    <div class="card-body">
-      <h5 class="card-title">{{ featuredPost.title }}</h5>
-      <p class="card-text">{{ featuredPost.content }}</p>
-      <a routerLink="/post/{{ featuredPost._id }}/view" class="btn btn-primary">View post</a>
+<div class="container">
+  <div *ngIf="featuredPost">
+    <div class="card">
+      <h5 class="card-header">Featured</h5>
+      <div class="card-body">
+        <h5 class="card-title">{{ featuredPost.title }}</h5>
+        <p class="card-text">{{ featuredPost.content }}</p>
+        <a routerLink="/post/{{ featuredPost._id }}/view" class="btn btn-primary">View post</a>
+      </div>
     </div>
   </div>
-</div>
-<hr>
-<h3>All previous posts</h3>
-<div class="container-fluid mt-4">
-  <div *ngIf="allPostGrouped?.length > 0">
-    <div class="row justify-content-center">
-      <div *ngFor="let postGroup of allPostGrouped">
-        <div *ngFor="let post of postGroup">
-          <div class="col-auto mb-3">
-            <div class="card" style="width: 18rem;">
-              <div class="card-body">
-                <h5 class="card-title">{{ post.title }}</h5>
-                <p class="card-text">{{ post.content }}</p>
-                <a routerLink="/post/{{ post._id }}/view" class="btn btn-primary">View post</a>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">{{ post.created | date: 'mediumDate' }}</small>
+  <hr>
+  <h3>All previous posts</h3>
+  <div class="container-fluid mt-4">
+    <div *ngIf="allPostGrouped?.length > 0">
+      <div class="row justify-content-center">
+        <div *ngFor="let postGroup of allPostGrouped">
+          <div *ngFor="let post of postGroup">
+            <div class="col-auto mb-3">
+              <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">{{ post.title }}</h5>
+                  <p class="card-text">{{ post.content }}</p>
+                  <a routerLink="/post/{{ post._id }}/view" class="btn btn-primary">View post</a>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">{{ post.created | date: 'mediumDate' }}</small>
+                </div>
               </div>
             </div>
           </div>
