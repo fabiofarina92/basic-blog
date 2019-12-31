@@ -1,11 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MdEditorComponent } from './md-editor/md-editor.component';
+import { MarkdownModule } from 'ngx-markdown';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [ ],
+  declarations: [MdEditorComponent],
   imports: [
-    CommonModule
+    ReactiveFormsModule,
+    CommonModule,
+    MarkdownModule.forRoot()
+  ],
+  exports: [
+    MdEditorComponent
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+}

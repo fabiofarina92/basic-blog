@@ -4,7 +4,7 @@
   </div>
 </div>
 <form [formGroup]="newPostForm">
-  <div class="container mt-4">
+  <div class="container mt-4 mb-5">
     <div class="form-group">
       <label for="title">Title</label>
       <input type="text" class="form-control" formControlName="title" id="title" autocomplete="off">
@@ -14,9 +14,7 @@
       <input type="text" class="form-control" formControlName="content" id="content" autocomplete="off">
     </div>
     <div class="form-group">
-      <h4>Post</h4>
-      <textarea class="variable-textarea" formControlName="post"></textarea>
-      <markdown class="variable-binding format-content" [data]="newPostForm.get('post').value" lineNumbers></markdown>
+      <app-md-editor formTitle="Post" [control]="newPostForm.get('post')"></app-md-editor>
     </div>
     <button type="button" class="btn btn-primary" (click)="submit()">Submit</button>
   </div>

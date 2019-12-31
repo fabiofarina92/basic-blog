@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
 import { MarkdownModule } from 'ngx-markdown';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { MarkdownModule } from 'ngx-markdown';
     NewPostComponent
   ],
   imports: [
+    SharedModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
