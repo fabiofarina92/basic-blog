@@ -33,16 +33,6 @@ export class ViewPostComponent implements OnInit {
   serverResponse: any = null;
 
   viewMode: 'edit' | 'view';
-  rteTools: any = {
-    items: [
-      'Bold', 'Italic', 'Underline', 'StrikeThrough', '|',
-      'FontName', 'FontSize', 'FontColor', 'BackgroundColor', '|',
-      'LowerCase', 'UpperCase', '|', 'Undo', 'Redo', '|',
-      'Formats', 'Alignments', '|', 'OrderedList', 'UnorderedList', '|',
-      'Indent', 'Outdent', '|', 'CreateLink', 'CreateTable',
-      'Image', '|', 'ClearFormat', 'Print', 'SourceCode', '|', 'FullScreen'
-    ]
-  };
   editPostForm: FormGroup;
 
   constructor(private route: ActivatedRoute, private postsService: PostsService, private formBuilder: FormBuilder) {
