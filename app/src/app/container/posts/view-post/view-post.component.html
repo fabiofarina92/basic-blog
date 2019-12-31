@@ -1,10 +1,10 @@
 <div *ngIf="selectedPostData">
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
-      <h1>
+      <h1 @titleLoadAnimation>
         {{ selectedPostData.title }}
       </h1>
-      <h4 class="text-muted">{{ selectedPostData.content }}</h4>
+      <h4 class="text-muted" @contentLoadAnimation>{{ selectedPostData.content }}</h4>
       <h6 class="font-italic">{{ selectedPostData.created | date: 'mediumDate' }}</h6>
     </div>
     <div class="float-right mt-2 mr-3">

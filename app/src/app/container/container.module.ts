@@ -5,6 +5,7 @@ import { AboutComponent } from './about/about.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { PostsModule } from './posts/posts.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { PostsModule } from './posts/posts.module';
   imports: [
     CommonModule,
     BrowserModule,
+    BrowserAnimationsModule,
     RouterModule,
     PostsModule
   ]

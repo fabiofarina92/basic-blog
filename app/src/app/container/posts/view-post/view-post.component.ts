@@ -10,6 +10,7 @@ import {
 } from '@syncfusion/ej2-angular-richtexteditor';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import hljs from 'highlight.js';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-view-post',
@@ -17,8 +18,29 @@ import hljs from 'highlight.js';
   styleUrls: ['./view-post.component.scss'],
   providers: [
     ToolbarService, LinkService, ImageService, HtmlEditorService, TableService
+  ],
+  animations: [
+    trigger('titleLoadAnimation', [
+      transition(':enter', [
+        style({transform: 'translateX(-100%)'}),
+        animate('300ms', style({transform: 'translateX(0%)'})),
+      ])
+    ]),
+    trigger('contentLoadAnimation', [
+      transition(':enter', [
+        style({
+          opacity: 0.1,
+          transform: 'translateX(200%)'
+        }),
+        animate('700ms', style({
+          opacity: 1,
+          transform: 'translateX(0%)'
+        })),
+      ])
+    ]),
   ]
 })
+
 export class ViewPostComponent implements OnInit {
 
   selectedPostId: string;
@@ -37,6 +59,7 @@ export class ViewPostComponent implements OnInit {
     ]
   };
   editPostForm: FormGroup;
+
   constructor(private route: ActivatedRoute, private postsService: PostsService, private formBuilder: FormBuilder) {
   }
 
