@@ -8,17 +8,24 @@
       <h6 class="font-italic">{{ selectedPostData.created | date: 'mediumDate' }}</h6>
     </div>
     <div class="float-right mt-2 mr-3">
-      <button type="button" class="btn btn-warning mr-1" (click)="edit()">Edit Post</button>
+      <button type="button" class="btn btn-warning mr-1" (click)="edit()" [disabled]="selectedPostData.postFormat !== 'MD'">Edit Post</button>
       <button type="button" class="btn btn-danger" (click)="delete()">Delete Post</button>
     </div>
   </div>
-  <div class="container mt-4">
-    <div class="format-content" [innerHTML]="selectedPostData.post"></div>
+  <div class="container mt-4 pb-5">
+    <div *ngIf="selectedPostData.postFormat === 'MD'">
+      <markdown [data]="selectedPostData.post" class="format-content" lineNumbers></markdown>
+    </div>
+    <div *ngIf="selectedPostData.postFormat !== 'MD'">
+      <div class="format-content" [innerHTML]="selectedPostData.post"></div>
+    </div>
   </div>
 </div>
 
-<div class="container-fluid">
-  <div *ngIf="selectedPostData && viewMode === 'edit'">
+<div class="container-fluid pb-5">
+  <div id="editViewAnchor"></div>
+  <div *ngIf="selectedPostData && selectedPostData.postFormat === 'MD' && viewMode === 'edit'">
+    <h2>Edit post</h2>
     <form [formGroup]="editPostForm">
       <div class="form-group">
         <label for="title">Title</label>
@@ -29,16 +36,13 @@
         <input type="text" class="form-control" formControlName="content" id="content">
       </div>
       <div class="form-group">
-        <label for="post">Post</label>
-        <ejs-richtexteditor [toolbarSettings]="rteTools" formControlName="post" id="post"></ejs-richtexteditor>
+        <h4>Post</h4>
+        <textarea class="variable-textarea" formControlName="post"></textarea>
+        <markdown class="variable-binding format-content" [data]="editPostForm.get('post').value" lineNumbers></markdown>
       </div>
       <button type="button" class="btn btn-primary" (click)="submit()">Submit</button>
     </form>
-    <div *ngIf="serverResponse">
-      <p>{{ serverResponse.message }}</p>
-    </div>
   </div>
-
   <div *ngIf="serverResponse">
     <div class="alert alert-primary" role="alert">
       {{ serverResponse.message }}

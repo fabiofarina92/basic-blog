@@ -21,16 +21,6 @@ export class NewPostComponent implements OnInit {
 
   newPostForm: FormGroup;
   serverResponse: any = null;
-  rteTools: any = {
-    items: [
-      'Bold', 'Italic', 'Underline', 'StrikeThrough', '|',
-      'FontName', 'FontSize', 'FontColor', 'BackgroundColor', '|',
-      'LowerCase', 'UpperCase', '|', 'Undo', 'Redo', '|',
-      'Formats', 'Alignments', '|', 'OrderedList', 'UnorderedList', '|',
-      'Indent', 'Outdent', '|', 'CreateLink', 'CreateTable',
-      'Image', '|', 'ClearFormat', 'Print', 'SourceCode', '|', 'FullScreen'
-    ]
-  };
 
   constructor(private formBuilder: FormBuilder, private postsService: PostsService) {
   }
@@ -47,8 +37,9 @@ export class NewPostComponent implements OnInit {
     const title = this.newPostForm.get('title').value;
     const content = this.newPostForm.get('content').value;
     const post = this.newPostForm.get('post').value;
+    const postFormat = 'MD';
 
-    this.postsService.new({title, content, post}).subscribe((response) => {
+    this.postsService.new({title, content, post, postFormat}).subscribe((response) => {
       this.serverResponse = response;
     });
   }

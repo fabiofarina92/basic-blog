@@ -9,8 +9,9 @@ import {
   ToolbarService
 } from '@syncfusion/ej2-angular-richtexteditor';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import hljs from 'highlight.js';
 import { slideFromLeftAnimation, slideFromRightAnimation } from '../../shared/animation/models/slide.animation';
+import { timer } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-view-post',
@@ -52,8 +53,6 @@ export class ViewPostComponent implements OnInit {
 
     this.postsService.get(this.selectedPostId).subscribe((data: any) => {
       this.selectedPostData = data;
-      // this.selectedPostData.post = this.findAndFormatOutput(data.post);
-      // this.selectedPostData.post = hljs.highlightAuto(data.post);
       console.log(this.selectedPostData);
     });
 
@@ -71,6 +70,10 @@ export class ViewPostComponent implements OnInit {
   }
 
   edit() {
+    timer(30).pipe(
+      map( () => document.getElementById('editViewAnchor').scrollIntoView({ behavior: 'smooth' }))
+    ).subscribe();
+    this.serverResponse = null;
     this.viewMode = 'edit';
     this.editPostForm.get('title').setValue(this.selectedPostData.title);
     this.editPostForm.get('content').setValue(this.selectedPostData.content);
@@ -81,8 +84,9 @@ export class ViewPostComponent implements OnInit {
     const title = this.editPostForm.get('title').value;
     const content = this.editPostForm.get('content').value;
     const post = this.editPostForm.get('post').value;
+    const postFormat = 'MD';
 
-    const newPost = {title, content, post};
+    const newPost = {title, content, post, postFormat};
 
     this.postsService.edit(this.selectedPostId, newPost).subscribe((response) => {
       this.serverResponse = response;
@@ -90,28 +94,5 @@ export class ViewPostComponent implements OnInit {
       this.selectedPostData = newPost;
       this.viewMode = 'view';
     });
-  }
-
-  findAndFormatOutput(content: any) {
-    let newContent = content;
-    const regex = /<\s*pre[^>]*><\s*code[^>]*>(.*?)<\s*\/\s*code><\s*\/\s*pre>/g;
-    const codeBlocks = content.match(regex);
-    console.log('blocks', codeBlocks[0]);
-
-    let m;
-    const arr = [];
-
-    while ((m = regex.exec(content)) != null) {
-      if (m.index === regex.lastIndex) {
-        regex.lastIndex++;
-      }
-      arr.push(m[1]);
-    }
-
-    console.log('arr', arr);
-    arr.forEach((val) => {
-      newContent = newContent.replace(val, hljs.highlightAuto(val, ['typescript']).value);
-    });
-    return newContent;
   }
 }

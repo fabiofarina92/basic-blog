@@ -48,6 +48,7 @@ export const newPost = (request: Request, response: Response) => {
                     _id: newId,
                     content: request.body.content,
                     post: request.body.post,
+                    postFormat: request.body.postFormat,
                     title: request.body.title
                 }).then((post) => {
                     if (post) {
@@ -92,7 +93,10 @@ export const editPost = (request: Request, response: Response) => {
     if (request.body.post.title && request.body.post.content && request.body.id) {
         Posts.findOneAndUpdate({_id: request.body.id}, {
             $set: {
-                content: request.body.post.content, post: request.body.post.post, title: request.body.post.title
+                content: request.body.post.content,
+                post: request.body.post.post,
+                postFormat: request.body.post.postFormat,
+                title: request.body.post.title
             }
         }).then((updatedPost) => {
             if (updatedPost) {

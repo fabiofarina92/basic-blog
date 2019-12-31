@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+
 const Schema = mongoose.Schema;
 
 const postsSchema = new Schema({
@@ -6,6 +7,7 @@ const postsSchema = new Schema({
     content: { type: String },
     created: { type: Date, default: Date.now },
     post: { type: String },
+    postFormat: { type: String },
     title: { type: String }
 });
 
