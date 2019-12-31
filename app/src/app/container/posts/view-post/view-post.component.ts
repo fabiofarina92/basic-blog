@@ -10,7 +10,7 @@ import {
 } from '@syncfusion/ej2-angular-richtexteditor';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import hljs from 'highlight.js';
-import { animate, style, transition, trigger } from '@angular/animations';
+import { slideFromLeftAnimation, slideFromRightAnimation } from '../../shared/animation/models/slide.animation';
 
 @Component({
   selector: 'app-view-post',
@@ -20,24 +20,8 @@ import { animate, style, transition, trigger } from '@angular/animations';
     ToolbarService, LinkService, ImageService, HtmlEditorService, TableService
   ],
   animations: [
-    trigger('titleLoadAnimation', [
-      transition(':enter', [
-        style({transform: 'translateX(-100%)'}),
-        animate('300ms', style({transform: 'translateX(0%)'})),
-      ])
-    ]),
-    trigger('contentLoadAnimation', [
-      transition(':enter', [
-        style({
-          opacity: 0.1,
-          transform: 'translateX(200%)'
-        }),
-        animate('700ms', style({
-          opacity: 1,
-          transform: 'translateX(0%)'
-        })),
-      ])
-    ]),
+    slideFromLeftAnimation('titleLoadAnimation'),
+    slideFromRightAnimation('contentLoadAnimation')
   ]
 })
 

@@ -22,7 +22,7 @@
       <div class="row justify-content-center">
         <div *ngFor="let postGroup of allPostGrouped">
           <div *ngFor="let post of postGroup">
-            <div class="col-auto mb-3" @myInsertRemoveTrigger>
+            <div class="col-auto mb-3" @fadeInAnimation>
               <div class="card" style="width: 18rem;">
                 <div class="card-body">
                   <h5 class="card-title">{{ post.title }}</h5>

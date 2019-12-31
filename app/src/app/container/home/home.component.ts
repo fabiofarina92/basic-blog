@@ -1,26 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { PostsService } from '../../service/posts/posts.service';
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { fadeAnimation } from '../shared/animation/models/fade.animation';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   animations: [
-    trigger('myInsertRemoveTrigger', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate('0.2s', style({ opacity: 1 })),
-      ]),
-    ])
+    fadeAnimation(),
   ]
 })
 export class HomeComponent implements OnInit {
 
   allPost: any = [];
   allPostGrouped: any = [];
-  featuredPost: any = []
-  constructor(private postsService: PostsService) { }
+  featuredPost: any = [];
+
+  constructor(private postsService: PostsService) {
+  }
 
   ngOnInit() {
     this.postsService.getAll().subscribe((data: []) => {
