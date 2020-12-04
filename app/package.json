@@ -22,7 +22,7 @@
     "@syncfusion/ej2-angular-richtexteditor": "^17.4.40",
     "bootstrap": "^4.4.1",
     "font-awesome": "^4.7.0",
-    "highlight.js": "^9.17.1",
+    "highlight.js": "^10.4.1",
     "ngx-markdown": "^8.2.1",
     "prismjs": "^1.17.1",
     "rxjs": "~6.4.0",
